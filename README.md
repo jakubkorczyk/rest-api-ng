@@ -23,3 +23,10 @@ and then:
 npm run compile 
 npm start
 ```
+
+## Configuration
+
+Configuration is read from the following environment variables:
+
+- `DATABASE_CONNECTION_STRING` [String] - connection string to MongoDB. Default value : "mongodb://localhost"
+- `PORT` - HTTP port for REST API (default: 8090)
