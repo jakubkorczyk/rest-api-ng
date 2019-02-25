@@ -1,0 +1,16 @@
+version: '3.5'
+services: 
+  
+  rest-api-ng:
+    build: ./
+    container_name: rest-api-ng
+    restart: always
+    command: bash -c 'exec node ./index.js'
+    ports:
+      - "8090:8090"
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"

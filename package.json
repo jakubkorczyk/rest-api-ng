@@ -9,10 +9,21 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "format": "prettier --config prettierrc.json --write './**/*.ts'",
     "format:check": "prettier --config prettierrc.json --list-different './**/*.ts' && npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compose": "npm run compose:build && npm run compose:up",
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down",
+    "compose:build": "docker-compose build"
   },
   "author": "Jakub Korczyk",
   "license": "ISC",
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakubkorczyk/rest-api-ng"
+  },
   "devDependencies": {
     "ts-jest": "23.10.5",
     "tslint": "5.9.1",
