@@ -15,6 +15,6 @@
     "declaration": false,
     "inlineSourceMap": true
   },
-  "exclude": ["node_modules", "dist", "test"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "include": ["src/**/*.ts"]
 }

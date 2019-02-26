@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import * as Joi from "joi";
 import { Level } from "./logger";
 
-interface Config {
+export interface Config {
   DATABASE_CONNECTION_STRING: string;
   LOG_LEVEL: Level;
   PORT: number;
