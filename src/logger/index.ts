@@ -18,12 +18,12 @@ export class Logger {
     }
   }
   public warn(msg: any) {
-    if([ "warn", "error"].includes(this.level)) {
+    if (["warn", "error"].includes(this.level)) {
       console.log(msg);
     }
   }
   public error(msg: any) {
-    if(this.level === "error") {
+    if (this.level === "error") {
       console.error(msg);
     }
   }

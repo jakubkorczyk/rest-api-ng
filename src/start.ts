@@ -15,10 +15,12 @@ export default async function() {
     logger,
     config
   };
-  try{
+  try {
     await start(dependencies);
   } catch (err) {
-    logger.error(`[start] Couldn't start application, following error occured: ${err}`);
+    logger.error(
+      `[start] Couldn't start application, following error occured: ${err}`
+    );
     process.exit(1);
   }
 }

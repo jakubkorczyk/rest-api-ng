@@ -11,7 +11,9 @@ function attachDependencies(dependencies: Dependencies): express.Handler {
 export function createApp(dependencies: Dependencies): express.Application {
   const app = express();
   app.use(attachDependencies(dependencies));
-  app.get("/", (_, res) => res.send({ message: "Welcome in another movie API ;)" }));
+  app.get("/", (_, res) =>
+    res.send({ message: "Welcome in another movie API ;)" })
+  );
 
   return app;
 }

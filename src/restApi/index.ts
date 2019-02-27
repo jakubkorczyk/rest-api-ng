@@ -8,7 +8,7 @@ export async function start(dependencies: Dependencies) {
   return new Promise((resolve, reject) => {
     app.listen(PORT, (err: Error) => {
       if (err) {
-        reject(err)
+        reject(err);
       } else {
         logger.info(`[http] Application is listening on port: ${PORT}`);
         resolve();
