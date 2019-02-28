@@ -1,17 +1,22 @@
 import * as request from "supertest";
 import { createApp } from "./createApp";
 import { Logger } from "../logger";
+import { Database } from "../database";
 
-const LOG_LEVEL = "error";
-const logger = new Logger("error");
+Date.now = jest.fn(() => 1551340763836);
 
+const config = {
+  DATABASE_CONNECTION_STRING: "localhost",
+  LOG_LEVEL: "error",
+  PORT: 8090
+};
+
+const logger = new Logger(config.LOG_LEVEL);
+const database = new Database(config.DATABASE_CONNECTION_STRING);
 const dependencies = {
   logger,
-  config: {
-    DATABASE_CONNECTION_STRING: "localhost",
-    LOG_LEVEL: "error",
-    PORT: 8090
-  }
+  config,
+  database
 };
 
 const app = createApp(dependencies);
@@ -24,5 +29,35 @@ describe("GET /", () => {
       .expect({
         message: "Welcome in another movie API ;)"
       });
+  });
+});
+
+describe("GET wrong path", () => {
+  test("returns 404 on wrong path", () => {
+    return request(app)
+      .get("/wrong")
+      .expect(404);
+  });
+});
+
+describe("Path /comments", () => {
+  test("returns success on comment save in database", (done) => {
+    return request(app)
+      .post("/comments")
+      .send({ comments: [{ user: "user", message: "message" }] })
+      .expect({
+        comments: [{ user: "user", message: "message" }],
+        message: "Saved succesfully"
+      })
+     .end(done);
+  });
+
+  test("returns list of comment saved in database", (done) => {
+    return request(app)
+      .get("/comments")
+      .expect({
+        comments: [{ user: "user", message: "message" }]
+      })
+     .end(done);
   });
 });

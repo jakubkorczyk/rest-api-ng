@@ -6,6 +6,8 @@ services:
     container_name: rest-api-ng
     restart: always
     command: bash -c 'exec node ./index.js'
+    environment:
+      DATABASE_CONNECTION_STRING: "mongodb://mongo/movies"
     ports:
       - "8090:8090"
 

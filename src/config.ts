@@ -11,7 +11,7 @@ export interface Config {
 dotenv.config();
 
 const configSchema = {
-  DATABASE_CONNECTION_STRING: Joi.string().default("mongodb://localhost"),
+  DATABASE_CONNECTION_STRING: Joi.string().default("mongodb://localhost:27017"),
   LOG_LEVEL: Joi.string()
     .valid(["error", "warn", "info", "debug", "trace"])
     .default("error"),

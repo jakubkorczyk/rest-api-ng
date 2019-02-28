@@ -1,5 +1,8 @@
 import * as express from "express";
+import { json } from "body-parser";
 import { Dependencies } from "../start";
+import router from "./router";
+import { errorHandler } from "./errors";
 
 function attachDependencies(dependencies: Dependencies): express.Handler {
   return function attachDependenciesToRequest(req, _, next) {
@@ -11,9 +14,9 @@ function attachDependencies(dependencies: Dependencies): express.Handler {
 export function createApp(dependencies: Dependencies): express.Application {
   const app = express();
   app.use(attachDependencies(dependencies));
-  app.get("/", (_, res) =>
-    res.send({ message: "Welcome in another movie API ;)" })
-  );
+  app.use(json());
+  app.use("/", router);
+  app.use(errorHandler);
 
   return app;
 }
