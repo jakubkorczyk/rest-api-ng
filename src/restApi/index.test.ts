@@ -41,23 +41,41 @@ describe("GET wrong path", () => {
 });
 
 describe("Path /comments", () => {
-  test("returns success on comment save in database", (done) => {
+  test("returns success on comment save in database", done => {
     return request(app)
       .post("/comments")
       .send({ comments: [{ user: "user", message: "message" }] })
+      .expect(200)
       .expect({
         comments: [{ user: "user", message: "message" }],
         message: "Saved succesfully"
       })
-     .end(done);
+      .end(done);
   });
 
-  test("returns list of comment saved in database", (done) => {
+  test("returns list of comment saved in database", done => {
     return request(app)
       .get("/comments")
+      .expect(200)
       .expect({
         comments: [{ user: "user", message: "message" }]
       })
-     .end(done);
+      .end(done);
+  });
+});
+
+describe("Path /movies", () => {
+  test("returns success on movie save in database", done => {
+    return request(app)
+      .post("/movies/?asfodnf=aaaa")
+      .expect(200)
+      .end(done);
+  });
+
+  test("returns 400 error when no parameters are sent", done => {
+    return request(app)
+      .post("/movies/")
+      .expect(400)
+      .end(done);
   });
 });

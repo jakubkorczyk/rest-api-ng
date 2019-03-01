@@ -1,14 +1,14 @@
 import * as express from "express";
-import { postComments, getComments } from "../handlers";
+import { handlers } from "../handlers";
 
 const router = express.Router();
 
 router.get("/", (_, res) =>
   res.send({ message: "Welcome in another movie API ;)" })
 );
-router.post("/movies");
-router.get("/movies");
-router.post("/comments", postComments);
-router.get("/comments", getComments);
+router.get("/movies", handlers.getMovies);
+router.post("/movies", handlers.postMovies);
+router.get("/comments", handlers.getComments);
+router.post("/comments", handlers.postComments);
 
 export default router;

@@ -5,6 +5,8 @@ import { Level } from "./logger";
 export interface Config {
   DATABASE_CONNECTION_STRING: string;
   LOG_LEVEL: Level;
+  MOVIE_API_KEY: string;
+  MOVIE_API_URL: string;
   PORT: number;
 }
 
@@ -15,6 +17,10 @@ const configSchema = {
   LOG_LEVEL: Joi.string()
     .valid(["error", "warn", "info", "debug", "trace"])
     .default("error"),
+  MOVIE_API_KEY: Joi.string().default("562fde7"),
+  MOVIE_API_URL: Joi.string()
+    .uri()
+    .default("http://www.omdbapi.com"),
   PORT: Joi.number()
     .integer()
     .default(8090)

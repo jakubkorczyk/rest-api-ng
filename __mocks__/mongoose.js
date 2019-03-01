@@ -1,4 +1,4 @@
-class CommentMock {
+class ModelMock {
   constructor(props) {
     this.props = props;
   }
@@ -7,32 +7,35 @@ class CommentMock {
     return this.props;
   }
 
-  async find() {
-    return [{ user: "user", message: "message" }]
-  }
-
   static async exec() {
     return result;
   }
 }
+
+class CommentMock extends ModelMock {
+  async find() {
+    return [{ user: "user", message: "message" }];
+  }
+}
+
+class MovieMock extends ModelMock {}
 
 class SchemaStub {
   index() {}
   pre() {}
 }
 
-class DocumentStub {
-
-}
+class DocumentStub {}
 
 const moongooseMock = {
   connect() {},
 
   model(name) {
     const mocks = {
-      Comment: CommentMock
+      Comment: CommentMock,
+      Movie: MovieMock
     };
-    return new mocks[name];
+    return new mocks[name]();
   },
 
   Schema: SchemaStub,

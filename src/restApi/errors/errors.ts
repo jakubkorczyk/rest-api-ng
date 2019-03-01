@@ -18,6 +18,10 @@ export function internal(details: string) {
   return createError(500, "INTERNAL_SERVER_ERROR", details);
 }
 
+export function badRequest(details: string) {
+  return createError(400, "BAD_REQUEST", details);
+}
+
 export function notFound() {
   return createError(404, "NOT_FOUND");
 }

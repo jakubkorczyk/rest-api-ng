@@ -4,7 +4,7 @@ import { internal } from "../errors/errors";
 export async function postComments(
   { body, dependencies }: Request,
   res: Response,
-  next: NextFunction
+  _: NextFunction
 ) {
   try {
     const { database } = dependencies;
@@ -14,7 +14,7 @@ export async function postComments(
     );
     await Promise.all(promises);
   } catch (err) {
-    next(internal(`[DB] Error while saving comment: "${err}`));
+    throw internal(`[DB] Error while saving comments: "${err}`);
   }
   res.contentType("application/json").json({
     ...body,

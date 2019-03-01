@@ -1,16 +1,32 @@
 import { Document, Schema, model } from "mongoose";
 import { createionDateMiddleware } from "./middlewares";
+import { MovieResponse } from "../../movieProvider";
 
-export interface Movie extends Document {
-  user: string;
-  message: string;
-  createdAt?: Date;
-}
+export interface Movie extends Document, MovieResponse {}
 
 export const movieSchema: Schema = new Schema({
-  user: String,
-  message: String,
-  createdAt: Date
+  _id: String,
+  Title: String,
+  Year: String,
+  Rated: String,
+  Released: String,
+  Runtime: String,
+  Genre: String,
+  Director: String,
+  Writer: String,
+  Actors: String,
+  Plot: String,
+  Language: String,
+  Country: String,
+  Awards: String,
+  Poster: String,
+  Ratings: Array,
+  Metascore: String,
+  imdbRating: String,
+  imdbVotes: String,
+  imdbID: String,
+  Type: String,
+  totalSeasons: Number
 });
 
 movieSchema.pre("save", createionDateMiddleware);
