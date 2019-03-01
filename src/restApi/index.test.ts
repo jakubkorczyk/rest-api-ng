@@ -2,7 +2,7 @@ import * as request from "supertest";
 import { createApp } from "./createApp";
 // import { Logger } from "../logger";
 import { Database } from "../database";
-import * as  mongoose from "mongoose";
+import * as mongoose from "mongoose";
 
 Date.now = jest.fn(() => 1551340763836);
 
@@ -11,15 +11,17 @@ const config = {
   PORT: 8090
 };
 class MovieProvider {
-  async getMovie() {return {}}
+  async getMovie() {
+    return {};
+  }
 }
 
 const movieProvider = new MovieProvider();
 class Logger {
-  error() {};
-  debug() {};
-  info() {};
-  warn() {};
+  error() {}
+  debug() {}
+  info() {}
+  warn() {}
 }
 
 const logger = new Logger();
@@ -34,7 +36,7 @@ const dependencies = {
 const app = createApp(dependencies);
 
 beforeEach(() => {
-  mongoose.__initMock()
+  mongoose.__initMock();
 });
 
 describe("GET /", () => {

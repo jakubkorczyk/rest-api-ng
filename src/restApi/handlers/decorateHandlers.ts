@@ -14,7 +14,7 @@ function decorator(handler: Handler): Handler {
   };
 }
 
-export function decorateHandlers(handlers: HandlersList): HandlersList{
+export function decorateHandlers(handlers: HandlersList): HandlersList {
   return Object.keys(handlers).reduce(
     (decorated, handlerName) => ({
       ...decorated,
