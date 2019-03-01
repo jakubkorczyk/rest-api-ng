@@ -13,8 +13,8 @@ function attachDependencies(dependencies: Dependencies): express.Handler {
 
 export function createApp(dependencies: Dependencies): express.Application {
   const app = express();
-  app.use(attachDependencies(dependencies));
   app.use(json());
+  app.use(attachDependencies(dependencies));
   app.use("/", router);
   app.use(errorHandler);
 

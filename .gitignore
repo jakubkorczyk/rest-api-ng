@@ -33,3 +33,7 @@ typings/
 
 # Compiled code 
 dist/
+
+#Code coverage
+coverage
+

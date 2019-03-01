@@ -9,7 +9,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "format": "prettier --config prettierrc.json --write './**/*.ts'",
     "format:check": "prettier --config prettierrc.json --list-different './**/*.ts' && npm run lint",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "test:coverage": "jest --noStackTrace --collectCoverage --no-cache",
     "compose": "npm run compose:build && npm run compose:up",
     "compose:up": "docker-compose up -d",

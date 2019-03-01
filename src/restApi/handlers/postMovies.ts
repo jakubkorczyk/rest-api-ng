@@ -17,7 +17,7 @@ export async function postMovies(
     const movie = await movieProvider.getMovie(query);
     await database.saveOrUpdateMovie(movie);
   } catch (err) {
-    throw internal(`[DB] Error while saving movie: ${err}.`);
+    throw internal(`Error while saving movie: ${err}.`);
   }
 
   res.contentType("application/json").json({

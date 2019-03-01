@@ -11,7 +11,7 @@ export async function getMovies(
     const { database } = dependencies;
     movies = await database.getMovies();
   } catch (err) {
-    throw internal(`[DB] Error while saving comment: "${err}`);
+    throw internal(`Error while saving comment: "${err}`);
   }
   res.contentType("application/json").json({
     movies

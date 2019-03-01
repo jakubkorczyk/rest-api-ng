@@ -14,7 +14,7 @@ export async function postComments(
     );
     await Promise.all(promises);
   } catch (err) {
-    throw internal(`[DB] Error while saving comments: "${err}`);
+    throw internal(`Error while saving comments: "${err}`);
   }
   res.contentType("application/json").json({
     ...body,

@@ -1,25 +1,41 @@
 import * as request from "supertest";
 import { createApp } from "./createApp";
-import { Logger } from "../logger";
+// import { Logger } from "../logger";
 import { Database } from "../database";
+import * as  mongoose from "mongoose";
 
 Date.now = jest.fn(() => 1551340763836);
 
 const config = {
   DATABASE_CONNECTION_STRING: "localhost",
-  LOG_LEVEL: "error",
   PORT: 8090
 };
+class MovieProvider {
+  async getMovie() {return {}}
+}
 
-const logger = new Logger(config.LOG_LEVEL);
+const movieProvider = new MovieProvider();
+class Logger {
+  error() {};
+  debug() {};
+  info() {};
+  warn() {};
+}
+
+const logger = new Logger();
 const database = new Database(config.DATABASE_CONNECTION_STRING);
 const dependencies = {
   logger,
   config,
-  database
+  database,
+  movieProvider
 };
 
 const app = createApp(dependencies);
+
+beforeEach(() => {
+  mongoose.__initMock()
+});
 
 describe("GET /", () => {
   test("returns basic API message on root path", () => {
@@ -52,7 +68,15 @@ describe("Path /comments", () => {
       })
       .end(done);
   });
+  test("returns 500 on comment save error in database", done => {
+    mongoose.__simulateDatabaseError();
 
+    return request(app)
+      .post("/comments")
+      .send({ comments: [{ user: "user", message: "message" }] })
+      .expect(500)
+      .end(done);
+  });
   test("returns list of comment saved in database", done => {
     return request(app)
       .get("/comments")
@@ -72,9 +96,18 @@ describe("Path /movies", () => {
       .end(done);
   });
 
+  test("returns 500 on movie save error in database", done => {
+    mongoose.__simulateDatabaseError();
+
+    return request(app)
+      .post("/movies/?asfodnf=aaaa")
+      .expect(500)
+      .end(done);
+  });
+
   test("returns 400 error when no parameters are sent", done => {
     return request(app)
-      .post("/movies/")
+      .post("/movies")
       .expect(400)
       .end(done);
   });

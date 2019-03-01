@@ -11,7 +11,7 @@ export async function getComments(
     const { database } = dependencies;
     comments = await database.getComments();
   } catch (err) {
-    throw internal(`[DB] Error while getting comments: "${err}`);
+    throw internal(`Error while getting comments: "${err}`);
   }
   res.contentType("application/json").json({
     comments

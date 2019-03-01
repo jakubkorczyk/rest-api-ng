@@ -15,4 +15,4 @@ dist
 .dockerignore
 .env
 .project
-
+coverage
