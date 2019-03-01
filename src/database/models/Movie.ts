@@ -1,6 +1,6 @@
 import { Document, Schema, model } from "mongoose";
 import { createionDateMiddleware } from "./middlewares";
-import { MovieResponse } from "../../movieProvider";
+import { MovieResponse } from "../../movieProvider/MovieProvider";
 
 export interface Movie extends Document, MovieResponse {}
 
