@@ -1,11 +1,12 @@
 import { Document, Schema, model } from "mongoose";
 import { createionDateMiddleware } from "./middlewares";
 
-export interface Comment extends Document {
+export interface Comment {
   user: string;
   message: string;
   createdAt?: Date;
 }
+interface CommentDoccument extends Comment, Document {}
 
 export const commentSchema: Schema = new Schema({
   user: String,
@@ -15,4 +16,4 @@ export const commentSchema: Schema = new Schema({
 
 commentSchema.pre("save", createionDateMiddleware);
 
-export const comment = model<Comment>("Comment", commentSchema);
+export const comment = model<CommentDoccument>("Comment", commentSchema);

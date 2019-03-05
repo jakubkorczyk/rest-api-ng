@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
-import { comment, movie } from "./models";
+import { comment, Comment, movie, Movie } from "./models";
+import { MovieResponse } from "../movieProvider/MovieProvider";
 
 export class Database {
   private connectionString: string;
@@ -12,7 +13,7 @@ export class Database {
     return mongoose.connect(this.connectionString, { useNewUrlParser: true });
   }
 
-  public async saveComment(data: any) {
+  public async saveComment(data: Comment) {
     await comment.create(data);
   }
 
@@ -20,10 +21,11 @@ export class Database {
     return comment.find();
   }
 
-  public async saveOrUpdateMovie(data: any) {
+  public async saveOrUpdateMovie(data: MovieResponse) {
     const { imdbID } = data;
-    data._id = imdbID;
-    const updated = await movie.findByIdAndUpdate(imdbID, data);
+    const movieData: Movie = { _id: imdbID, ...data };
+
+    const updated = await movie.findByIdAndUpdate(imdbID, movieData);
     if (!updated) {
       await movie.create(data);
     }

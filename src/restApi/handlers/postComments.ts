@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { internal } from "../errors/errors";
+import { models } from "../../database"
 
 export async function postComments(
   { body, dependencies }: Request,
@@ -9,7 +10,7 @@ export async function postComments(
   try {
     const { database } = dependencies;
     const { comments } = body;
-    const promises = comments.map(async (comment: Comment) =>
+    const promises = comments.map(async (comment: models.Comment) =>
       database.saveComment(comment)
     );
     await Promise.all(promises);
